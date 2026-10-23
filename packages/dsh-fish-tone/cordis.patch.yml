@@ -1,0 +1,12 @@
+# dsh-fish-tone 的 bundle patch —— 把「人味插件」挂进 DSH 配置树
+#
+#   insert: 往配置树里加一行 entry
+#   id:     这一行的唯一标识（用户层可按 id 覆盖 config）
+#   name:   'dsh-fish-tone' 解析到本包入口 lib/index.js（宿主半侧）
+
+- insert:
+    - id: fish-tone
+      name: 'dsh-fish-tone'
+      config:
+        strength: light
+        seed: 7

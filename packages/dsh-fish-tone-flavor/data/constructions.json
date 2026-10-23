@@ -1,0 +1,381 @@
+[
+ {
+  "id": "x01",
+  "name": "X？！",
+  "template": "{短名词}？！",
+  "effect": "把刚听到的东西甩出来，再接一个问号 —— 不信、没听懂、你再说一遍。日常就用这个。",
+  "example": "14.69？！",
+  "probe": "！？",
+  "vibes": [
+   "abstract",
+   "ironic"
+  ],
+  "variants": [
+   "！？强强？！",
+   "！？大冰？！",
+   "！？？？？！"
+  ],
+  "note": "「！？」那个前缀是加码版：只在两个叠字（强强 / 电电 / 卷卷）或者抽象视频里的抽象名词上用。不分场合加上去就成了乱用。",
+  "corpus": {
+   "comment": 11,
+   "danmaku": 478
+  },
+  "abstract": {
+   "comment": 7,
+   "danmaku": 305
+  }
+ },
+ {
+  "id": "x02",
+  "name": "X了",
+  "template": "{神/绝/拉/寄/麻/赢麻}了",
+  "effect": "一个词收掉全部评价，越短越狠",
+  "example": "这波拉了 / 神了 / 寄了",
+  "probe": "神了",
+  "vibes": [
+   "ironic",
+   "abstract"
+  ],
+  "corpus": {
+   "comment": 15,
+   "danmaku": 143
+  }
+ },
+ {
+  "id": "x03",
+  "name": "单字判词",
+  "template": "典 / 孝 / 急 / 乐 / 蚌 / 赢",
+  "effect": "一个字判完，赛博六艺：典=教科书式，孝=讽刺式吹捧，急=你急了，蚌=绷不住，乐=看乐子，赢=赢麻了",
+  "example": "典。孝。急。",
+  "probe": "孝",
+  "vibes": [
+   "ironic"
+  ],
+  "corpus": {
+   "comment": 14,
+   "danmaku": 51
+  }
+ },
+ {
+  "id": "x04",
+  "name": "当个事儿办",
+  "template": "别让{X}做这个了 / 行，我回去说他 / 当个事儿办",
+  "effect": "三段式假正经，把芝麻当西瓜",
+  "example": "给猫铲屎，当个事儿办",
+  "probe": "当个事儿办",
+  "vibes": [
+   "fun",
+   "ironic"
+  ],
+  "corpus": {
+   "comment": 0,
+   "danmaku": 0
+  }
+ },
+ {
+  "id": "x05",
+  "name": "一整个X住",
+  "template": "一整个{X}住了",
+  "effect": "状态被拉满，形容被震住/尬住/甜住",
+  "example": "我一整个大无语住了",
+  "probe": "一整个",
+  "vibes": [
+   "fun"
+  ],
+  "corpus": {
+   "comment": 6,
+   "danmaku": 11
+  }
+ },
+ {
+  "id": "x06",
+  "name": "有亿点X",
+  "template": "有亿点{X}",
+  "effect": "把「一点」夸张成「亿点」",
+  "example": "这操作有亿点离谱",
+  "probe": "亿点",
+  "vibes": [
+   "fun",
+   "abstract"
+  ],
+  "corpus": {
+   "comment": 2,
+   "danmaku": 22
+  }
+ },
+ {
+  "id": "x07",
+  "name": "X了，但没完全X",
+  "template": "{X}了，但没完全{X}",
+  "effect": "承认一半，留一半嘲讽",
+  "example": "修好了，但没完全修好",
+  "probe": "但没完全",
+  "vibes": [
+   "ironic"
+  ],
+  "corpus": {
+   "comment": 0,
+   "danmaku": 5
+  }
+ },
+ {
+  "id": "x08",
+  "name": "就这？",
+  "template": "就这？",
+  "effect": "挑衅式轻蔑，嫌不够看",
+  "example": "就这？",
+  "probe": "就这",
+  "vibes": [
+   "ironic"
+  ],
+  "corpus": {
+   "comment": 56,
+   "danmaku": 208
+  }
+ },
+ {
+  "id": "x09",
+  "name": "啊？",
+  "template": "啊？ / 哈？",
+  "effect": "一个音节表示「我没听懂但大受震撼」",
+  "example": "啊？",
+  "probe": "啊？",
+  "vibes": [
+   "abstract"
+  ],
+  "corpus": {
+   "comment": 50,
+   "danmaku": 745
+  }
+ },
+ {
+  "id": "x10",
+  "name": "你说的对，但是",
+  "template": "你说的对，但是{转折}",
+  "effect": "先认错再反驳，礼貌型开杠",
+  "example": "你说的对，但是我觉得不行",
+  "probe": "你说的对",
+  "vibes": [
+   "ironic"
+  ],
+  "corpus": {
+   "comment": 0,
+   "danmaku": 2
+  }
+ },
+ {
+  "id": "x11",
+  "name": "建议改成",
+  "template": "建议改成{X}",
+  "effect": "弹幕式改写建议，常带调侃",
+  "example": "建议改成经典",
+  "probe": "建议改成",
+  "vibes": [
+   "ironic"
+  ],
+  "corpus": {
+   "comment": 1,
+   "danmaku": 4
+  }
+ },
+ {
+  "id": "x12",
+  "name": "听君一席话",
+  "template": "听君一席话，如听一席话",
+  "effect": "废话文学：说了等于没说",
+  "example": "听君一席话，如听一席话",
+  "probe": "如听一席话",
+  "vibes": [
+   "fun",
+   "abstract"
+  ],
+  "corpus": {
+   "comment": 0,
+   "danmaku": 0
+  }
+ },
+ {
+  "id": "x13",
+  "name": "谁问你了",
+  "template": "谁问你了？",
+  "effect": "截断对方自说自话",
+  "example": "谁问你了",
+  "probe": "谁问你了",
+  "vibes": [
+   "ironic"
+  ],
+  "corpus": {
+   "comment": 4,
+   "danmaku": 3
+  }
+ },
+ {
+  "id": "x14",
+  "name": "你是懂X的",
+  "template": "你是懂{X}的",
+  "effect": "阴阳式夸奖，「你可太懂了」",
+  "example": "你是懂剪辑的",
+  "probe": "你是懂",
+  "vibes": [
+   "ironic"
+  ],
+  "corpus": {
+   "comment": 6,
+   "danmaku": 10
+  }
+ },
+ {
+  "id": "x15",
+  "name": "X不了一点",
+  "template": "{X}不了一点",
+  "effect": "彻底否定，一点余地都不给",
+  "example": "这锅我不背不了一点",
+  "probe": "不了一点",
+  "vibes": [
+   "fun",
+   "ironic"
+  ],
+  "corpus": {
+   "comment": 1,
+   "danmaku": 7
+  }
+ },
+ {
+  "id": "x16",
+  "name": "有点X，不确定，再看看",
+  "template": "有点{X}，不确定，再看看",
+  "effect": "欲言又止的三段式，把吐槽咽回去",
+  "example": "有点离谱，不确定，再看看",
+  "probe": "再看看",
+  "vibes": [
+   "abstract"
+  ],
+  "corpus": {
+   "comment": 8,
+   "danmaku": 23
+  }
+ },
+ {
+  "id": "x17",
+  "name": "这很难评",
+  "template": "这很难评，我祝他成功",
+  "effect": "不评价的评价",
+  "example": "这很难评",
+  "probe": "这很难评",
+  "vibes": [
+   "ironic"
+  ],
+  "corpus": {
+   "comment": 0,
+   "danmaku": 0
+  }
+ },
+ {
+  "id": "x18",
+  "name": "菜就多练",
+  "template": "菜就多练",
+  "effect": "打不过就练，最省事的嘲讽",
+  "example": "菜就多练",
+  "probe": "菜就多练",
+  "vibes": [
+   "ironic",
+   "broken"
+  ],
+  "corpus": {
+   "comment": 0,
+   "danmaku": 5
+  }
+ },
+ {
+  "id": "x19",
+  "name": "含金量还在上升",
+  "template": "{X}的含金量还在上升",
+  "effect": "事后追认，越看越厉害",
+  "example": "这个操作的含金量还在上升",
+  "probe": "含金量",
+  "vibes": [
+   "hype"
+  ],
+  "corpus": {
+   "comment": 4,
+   "danmaku": 49
+  }
+ },
+ {
+  "id": "x20",
+  "name": "开香槟",
+  "template": "半场开香槟",
+  "effect": "提前庆祝，然后翻车",
+  "example": "别急着开香槟",
+  "probe": "香槟",
+  "vibes": [
+   "fun"
+  ],
+  "corpus": {
+   "comment": 0,
+   "danmaku": 2
+  }
+ },
+ {
+  "id": "x21",
+  "name": "不是，哥们",
+  "template": "不是，哥们",
+  "effect": "被打断思路的第一反应",
+  "example": "不是，哥们，你在干啥",
+  "probe": "不是，哥们",
+  "vibes": [
+   "abstract",
+   "fun"
+  ],
+  "corpus": {
+   "comment": 0,
+   "danmaku": 4
+  }
+ },
+ {
+  "id": "x22",
+  "name": "已阅",
+  "template": "已阅，下一个",
+  "effect": "看完了，不打算多说",
+  "example": "已阅，下一个",
+  "probe": "已阅",
+  "vibes": [
+   "ironic"
+  ],
+  "corpus": {
+   "comment": 1,
+   "danmaku": 1
+  }
+ },
+ {
+  "id": "x23",
+  "name": "说人话",
+  "template": "说人话",
+  "effect": "要求立刻翻译成白话",
+  "example": "说人话",
+  "probe": "说人话",
+  "vibes": [
+   "fun"
+  ],
+  "corpus": {
+   "comment": 0,
+   "danmaku": 3
+  }
+ },
+ {
+  "id": "x24",
+  "name": "包浆了",
+  "template": "这图/这话都包浆了",
+  "effect": "老梗被反复用，磨出包浆",
+  "example": "这梗都包浆了",
+  "probe": "包浆",
+  "vibes": [
+   "fun",
+   "retro"
+  ],
+  "corpus": {
+   "comment": 2,
+   "danmaku": 9
+  }
+ }
+]

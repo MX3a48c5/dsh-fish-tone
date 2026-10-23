@@ -1,0 +1,13 @@
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# 本地设置与日志，不进仓库
+config.json
+debug.log
+*.log
+.DS_Store
+
+# dsh 运行时产物
+.dsh/

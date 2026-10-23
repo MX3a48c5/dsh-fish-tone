@@ -1,0 +1,13 @@
+# dsh-fish-tone-flavor 的 bundle patch —— 人味插件的附属包（性格层）
+#
+# 主插件（dsh-fish-tone）保持中性；可爱 / 抽象 / 热梗都放在这一包里，
+# 而且默认 enabled: false —— 不打开就跟没装一样。
+
+- insert:
+    - id: fish-tone-flavor
+      name: 'dsh-fish-tone-flavor'
+      config:
+        enabled: false
+        mode: cute
+        rate: low
+        seed: 7

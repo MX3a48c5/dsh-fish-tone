@@ -1,0 +1,43 @@
+{
+  "name": "dsh-fish-tone",
+  "version": "0.2.1",
+  "description": "双向鱼群拓扑 · 人味插件：把话往人的方向掰一点点（带设置页）",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "client.js",
+    "dsh-plugin.json",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-settings-plugins"
+      ]
+    }
+  },
+  "scripts": {
+    "test": "node --import ./tools/preload.mjs --test"
+  },
+  "os": [
+    "linux",
+    "darwin",
+    "win32"
+  ],
+  "license": "MIT"
+}

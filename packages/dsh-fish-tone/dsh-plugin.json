@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/T-Auto/dsh-std/8a15541117cb3c13ddb8f2468308691b6051d162/packages/manifest/schema/dsh-plugin-0.15.schema.json",
+  "manifestVersion": "0.15",
+  "id": "dsh-fish-tone.local",
+  "name": "dsh-fish-tone",
+  "version": "0.2.1",
+  "license": "MIT",
+  "description": "双向鱼群拓扑 · 人味插件:每句话只跟前后两句握手,握完就学会犹豫,句尾挂一点没用的东西",
+  "facets": {
+    "host": { "entry": "lib/index.js", "apiVersion": "v1alpha1" }
+  },
+  "requires": {
+    "contracts": [{ "apiVersion": "tools.dsh/v1alpha1", "kind": "Tool" }]
+  },
+  "permissions": [],
+  "contributes": {
+    "x-display": [
+      {
+        "title": "dsh-fish-tone",
+        "description": "双向鱼群拓扑人味插件:犹豫半秒、句尾挂尾巴、越没用越像人"
+      }
+    ]
+  }
+}

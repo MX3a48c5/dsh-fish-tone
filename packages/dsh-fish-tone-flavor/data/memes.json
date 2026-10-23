@@ -1,0 +1,1553 @@
+{
+  "note": "网络热梗库。计数来自 B 站语料（评论+弹幕，按子串匹配，含少量误配）；原文例句不入库。",
+  "builtAt": "2026-10-23",
+  "count": 77,
+  "memes": [
+    {
+      "id": "m001",
+      "term": "抽象",
+      "aliases": [
+        "太抽象",
+        "抽象力"
+      ],
+      "year": "2026",
+      "vibes": [
+        "abstract",
+        "ironic"
+      ],
+      "gloss": "荒诞到不像真实世界会发生，用解构消化压力",
+      "usage": "这个剧情抽象力拉满",
+      "source": "小红书2026十大热词",
+      "tail": true,
+      "corpus": {
+        "hits": 197,
+        "comment": 29,
+        "danmaku": 168,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m002",
+      "term": "活人感",
+      "aliases": [],
+      "year": "2026",
+      "vibes": [
+        "heal",
+        "cute"
+      ],
+      "gloss": "真实、有温度、不像模板或AI生成",
+      "usage": "这个博主很有活人感",
+      "source": "小红书2026十大热词",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m003",
+      "term": "含人量",
+      "aliases": [],
+      "year": "2026",
+      "vibes": [
+        "heal"
+      ],
+      "gloss": "内容和人味儿的比例，越高越真实",
+      "usage": "这条视频含人量极高",
+      "source": "上观新闻·不止于玩梗",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m004",
+      "term": "爱你老己",
+      "aliases": [
+        "老己"
+      ],
+      "year": "2026",
+      "vibes": [
+        "heal",
+        "cute"
+      ],
+      "gloss": "把自己叫「老己」，自我照顾、自我和解",
+      "usage": "下班买杯奶茶，爱你老己",
+      "source": "小红书/上观 2026热词",
+      "tail": false,
+      "corpus": {
+        "hits": 1,
+        "comment": 0,
+        "danmaku": 1,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m005",
+      "term": "敬自己一杯",
+      "aliases": [],
+      "year": "2025",
+      "vibes": [
+        "heal",
+        "hype"
+      ],
+      "gloss": "对努力过也平凡过的自己举杯",
+      "usage": "项目结束，敬自己一杯",
+      "source": "新华社2025十大网络流行语",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m006",
+      "term": "助我破鼎",
+      "aliases": [],
+      "year": "2025",
+      "vibes": [
+        "hype"
+      ],
+      "gloss": "关键时刻给自己打气，冲一把",
+      "usage": "这次汇报助我破鼎",
+      "source": "新华社2025十大网络流行语",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m007",
+      "term": "情绪价值",
+      "aliases": [],
+      "year": "2025",
+      "vibes": [
+        "heal",
+        "work"
+      ],
+      "gloss": "能让人被理解、被安慰的那部分收益",
+      "usage": "这杯奶茶提供了情绪价值",
+      "source": "新华社2025十大网络流行语",
+      "tail": false,
+      "corpus": {
+        "hits": 1,
+        "comment": 1,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m008",
+      "term": "如何呢又能怎",
+      "aliases": [
+        "如何呢？又能怎"
+      ],
+      "year": "2025",
+      "vibes": [
+        "slacker",
+        "abstract"
+      ],
+      "gloss": "事情已经这样了，还能怎么办，从容接受",
+      "usage": "周一又来了，如何呢又能怎",
+      "source": "新华社2025十大网络流行语",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m009",
+      "term": "村咖",
+      "aliases": [],
+      "year": "2025",
+      "vibes": [
+        "heal"
+      ],
+      "gloss": "乡村咖啡馆，周末轻度逃离城市",
+      "usage": "周末去村咖坐坐",
+      "source": "新华社2025十大网络流行语",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m010",
+      "term": "来财",
+      "aliases": [],
+      "year": "2025",
+      "vibes": [
+        "hype",
+        "cute"
+      ],
+      "gloss": "对钱、offer、好运的直白期待",
+      "usage": "来财，来offer",
+      "source": "新华社2025十大网络流行语",
+      "tail": true,
+      "corpus": {
+        "hits": 4,
+        "comment": 1,
+        "danmaku": 3,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m011",
+      "term": "浪浪山小妖怪",
+      "aliases": [
+        "浪浪山"
+      ],
+      "year": "2025",
+      "vibes": [
+        "heal",
+        "broken"
+      ],
+      "gloss": "小人物努力生活的代入符号",
+      "usage": "今天也是浪浪山小妖怪",
+      "source": "新华社2025十大网络流行语",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m012",
+      "term": "基础",
+      "aliases": [
+        "不基础"
+      ],
+      "year": "2025",
+      "vibes": [
+        "ironic",
+        "work"
+      ],
+      "gloss": "「××基础，××不基础」：表面简单，难的部分藏在后半句",
+      "usage": "上班基础，开心不基础",
+      "source": "新华社2025十大网络流行语",
+      "tail": false,
+      "corpus": {
+        "hits": 347,
+        "comment": 130,
+        "danmaku": 217,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m013",
+      "term": "千百次练习只为这一刻",
+      "aliases": [],
+      "year": "2025",
+      "vibes": [
+        "hype"
+      ],
+      "gloss": "长期打磨，只为关键一击",
+      "usage": "千百次练习只为这一刻",
+      "source": "新华社2025十大网络流行语",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m014",
+      "term": "赛博对账",
+      "aliases": [],
+      "year": "2026",
+      "vibes": [
+        "heal"
+      ],
+      "gloss": "在网上核对共同记忆，发现「原来你也这样」",
+      "usage": "评论区大型赛博对账",
+      "source": "上观新闻热词盘点",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m015",
+      "term": "班味",
+      "aliases": [],
+      "year": "2026",
+      "vibes": [
+        "work",
+        "broken"
+      ],
+      "gloss": "被上班消耗后的疲惫气质",
+      "usage": "一开会班味就重了",
+      "source": "LingoAce 2026热梗",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m016",
+      "term": "真没空陪你闹了",
+      "aliases": [],
+      "year": "2026",
+      "vibes": [
+        "work",
+        "ironic"
+      ],
+      "gloss": "不再被无效拉扯消耗",
+      "usage": "临下班又改需求，真没空陪你闹了",
+      "source": "LingoAce 2026热梗",
+      "tail": true,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m017",
+      "term": "预制",
+      "aliases": [
+        "预制朋友圈",
+        "预制人生"
+      ],
+      "year": "2026",
+      "vibes": [
+        "ironic",
+        "abstract"
+      ],
+      "gloss": "批量、模板化、没有灵魂",
+      "usage": "这组图太预制朋友圈了",
+      "source": "LingoAce 2026热梗",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m018",
+      "term": "如何呢",
+      "aliases": [],
+      "year": "2026",
+      "vibes": [
+        "slacker"
+      ],
+      "gloss": "无奈又松弛的反问",
+      "usage": "如何呢",
+      "source": "LingoAce 2026热梗",
+      "tail": true,
+      "corpus": {
+        "hits": 10,
+        "comment": 1,
+        "danmaku": 9,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m019",
+      "term": "邪修",
+      "aliases": [],
+      "year": "2026",
+      "vibes": [
+        "abstract",
+        "fun"
+      ],
+      "gloss": "用非传统但有效的野路子解决问题",
+      "usage": "邪修做饭",
+      "source": "LingoAce 2026热梗",
+      "tail": false,
+      "corpus": {
+        "hits": 1,
+        "comment": 0,
+        "danmaku": 1,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m020",
+      "term": "外耗",
+      "aliases": [],
+      "year": "2026",
+      "vibes": [
+        "ironic",
+        "heal"
+      ],
+      "gloss": "和内耗相反，把压力往外表达、守住边界",
+      "usage": "别内耗，适度外耗",
+      "source": "LingoAce 2026热梗",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m021",
+      "term": "谷子",
+      "aliases": [],
+      "year": "2026",
+      "vibes": [
+        "cute"
+      ],
+      "gloss": "ACGN周边的圈层叫法",
+      "usage": "周末去买谷子",
+      "source": "LingoAce 2026热梗",
+      "tail": false,
+      "corpus": {
+        "hits": 1,
+        "comment": 0,
+        "danmaku": 1,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m022",
+      "term": "痛包",
+      "aliases": [
+        "痛车",
+        "痛文化"
+      ],
+      "year": "2026",
+      "vibes": [
+        "cute",
+        "abstract"
+      ],
+      "gloss": "挂满角色周边的包/车，痛系生活",
+      "usage": "今天背痛包去漫展",
+      "source": "小红书2026十大热词",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m023",
+      "term": "我要验牌",
+      "aliases": [
+        "牌没有问题"
+      ],
+      "year": "2026",
+      "vibes": [
+        "abstract",
+        "ironic"
+      ],
+      "gloss": "要求对方亮证据、亮底牌",
+      "usage": "你说你没摸鱼？我要验牌",
+      "source": "光明网·网络热梗",
+      "tail": false,
+      "corpus": {
+        "hits": 12,
+        "comment": 0,
+        "danmaku": 12,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m024",
+      "term": "妈妈我上电视了",
+      "aliases": [],
+      "year": "2026",
+      "vibes": [
+        "cute",
+        "abstract"
+      ],
+      "gloss": "直播里刷存在感，假装上镜",
+      "usage": "直播弹幕刷一句",
+      "source": "人民网·B站春晚弹幕",
+      "tail": false,
+      "corpus": {
+        "hits": 6,
+        "comment": 0,
+        "danmaku": 6,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m025",
+      "term": "我是真人",
+      "aliases": [],
+      "year": "2026",
+      "vibes": [
+        "abstract"
+      ],
+      "gloss": "在AI内容海里强调自己是活人",
+      "usage": "别封我，我是真人",
+      "source": "人民网·B站春晚弹幕",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m026",
+      "term": "丝瓜汤",
+      "aliases": [
+        "丝瓜汤文学"
+      ],
+      "year": "2026",
+      "vibes": [
+        "broken",
+        "heal"
+      ],
+      "gloss": "长辈式关心与真实需求错位",
+      "usage": "这又是丝瓜汤式关心",
+      "source": "上观新闻热词盘点",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m027",
+      "term": "老式人类",
+      "aliases": [
+        "老品种小孩"
+      ],
+      "year": "2026",
+      "vibes": [
+        "cute",
+        "heal"
+      ],
+      "gloss": "自嘲作息老派、拒绝加速",
+      "usage": "我就是老式人类，十点必须睡",
+      "source": "上观新闻热词盘点",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m028",
+      "term": "我去不早说",
+      "aliases": [
+        "我去，不早说"
+      ],
+      "year": "2026",
+      "vibes": [
+        "abstract",
+        "ironic"
+      ],
+      "gloss": "吐槽对方说的太晚或太废话",
+      "usage": "熬夜会困。我去，不早说",
+      "source": "悟空中文2026热梗",
+      "tail": true,
+      "corpus": {
+        "hits": 8,
+        "comment": 0,
+        "danmaku": 8,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m029",
+      "term": "我将全职在家研究",
+      "aliases": [
+        "我将辞职在家研究"
+      ],
+      "year": "2026",
+      "vibes": [
+        "slacker",
+        "abstract"
+      ],
+      "gloss": "用严肃「研究」包装上头和想宅家",
+      "usage": "这评论区我将全职在家研究",
+      "source": "悟空中文2026热梗",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m030",
+      "term": "不讲不讲",
+      "aliases": [],
+      "year": "2026",
+      "vibes": [
+        "ironic"
+      ],
+      "gloss": "不想聊，不展开，懂的都懂",
+      "usage": "细节不讲不讲",
+      "source": "悟空中文2026热梗",
+      "tail": true,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m031",
+      "term": "我的身材很曼妙",
+      "aliases": [],
+      "year": "2026",
+      "vibes": [
+        "abstract"
+      ],
+      "gloss": "用不相干的自信回答逃避问题",
+      "usage": "为什么迟到？不知道，我的身材很曼妙",
+      "source": "悟空中文2026热梗",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m032",
+      "term": "低山臭水遇知音",
+      "aliases": [],
+      "year": "2026",
+      "vibes": [
+        "abstract",
+        "heal"
+      ],
+      "gloss": "「高山流水」的降维改写，低配但同频",
+      "usage": "咱俩低山臭水遇知音",
+      "source": "LingoAce 2026热梗",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m033",
+      "term": "你已急哭",
+      "aliases": [],
+      "year": "2026",
+      "vibes": [
+        "ironic"
+      ],
+      "gloss": "调侃对方急了、破防了",
+      "usage": "别打错字了，你已急哭",
+      "source": "悟空中文2026热梗",
+      "tail": true,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m034",
+      "term": "致敬",
+      "aliases": [],
+      "year": "2025",
+      "vibes": [
+        "hype",
+        "heal"
+      ],
+      "gloss": "B站2025年度弹幕，向普通人/平凡时刻致意",
+      "usage": "这条视频值得一个致敬",
+      "source": "B站2025年度弹幕",
+      "tail": true,
+      "corpus": {
+        "hits": 416,
+        "comment": 24,
+        "danmaku": 392,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m035",
+      "term": "破防",
+      "aliases": [
+        "破防了"
+      ],
+      "year": "2021",
+      "vibes": [
+        "broken"
+      ],
+      "gloss": "心理防线被击穿，感动或被气到",
+      "usage": "看到这段破防了",
+      "source": "B站弹幕常青梗",
+      "tail": true,
+      "corpus": {
+        "hits": 51,
+        "comment": 9,
+        "danmaku": 42,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m036",
+      "term": "yyds",
+      "aliases": [],
+      "year": "2021",
+      "vibes": [
+        "hype"
+      ],
+      "gloss": "永远的神",
+      "usage": "这个功能yyds",
+      "source": "网络基础语",
+      "tail": true,
+      "corpus": {
+        "hits": 306,
+        "comment": 9,
+        "danmaku": 297,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m037",
+      "term": "awsl",
+      "aliases": [],
+      "year": "2019",
+      "vibes": [
+        "cute"
+      ],
+      "gloss": "啊我死了，可爱到受不了",
+      "usage": "awsl",
+      "source": "网络基础语",
+      "tail": true,
+      "corpus": {
+        "hits": 1063,
+        "comment": 1,
+        "danmaku": 1062,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m038",
+      "term": "爷青回",
+      "aliases": [],
+      "year": "2020",
+      "vibes": [
+        "retro"
+      ],
+      "gloss": "爷的青春回来了",
+      "usage": "爷青回",
+      "source": "B站年度弹幕",
+      "tail": true,
+      "corpus": {
+        "hits": 1769,
+        "comment": 5,
+        "danmaku": 1764,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m039",
+      "term": "绷不住了",
+      "aliases": [
+        "蚌埠住了"
+      ],
+      "year": "2021",
+      "vibes": [
+        "broken",
+        "abstract"
+      ],
+      "gloss": "忍不住笑/忍不住情绪",
+      "usage": "我真的绷不住了",
+      "source": "网络基础语",
+      "tail": true,
+      "corpus": {
+        "hits": 254,
+        "comment": 6,
+        "danmaku": 248,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m040",
+      "term": "典",
+      "aliases": [
+        "典中典"
+      ],
+      "year": "2022",
+      "vibes": [
+        "ironic"
+      ],
+      "gloss": "典型到不能再典型，常带嘲讽",
+      "usage": "典，太典了",
+      "source": "B站弹幕常青梗",
+      "tail": true,
+      "corpus": {
+        "hits": 1539,
+        "comment": 135,
+        "danmaku": 1404,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m041",
+      "term": "逆天",
+      "aliases": [],
+      "year": "2021",
+      "vibes": [
+        "ironic",
+        "abstract"
+      ],
+      "gloss": "离谱到违背常理",
+      "usage": "这操作太逆天了",
+      "source": "B站弹幕常青梗",
+      "tail": true,
+      "corpus": {
+        "hits": 133,
+        "comment": 11,
+        "danmaku": 122,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m042",
+      "term": "离谱",
+      "aliases": [],
+      "year": "2021",
+      "vibes": [
+        "ironic",
+        "abstract"
+      ],
+      "gloss": "不合常理、太夸张",
+      "usage": "这也太离谱了",
+      "source": "网络基础语",
+      "tail": true,
+      "corpus": {
+        "hits": 423,
+        "comment": 45,
+        "danmaku": 378,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m043",
+      "term": "这很难评",
+      "aliases": [],
+      "year": "2023",
+      "vibes": [
+        "ironic"
+      ],
+      "gloss": "不好评价，留白式吐槽",
+      "usage": "这很难评，我祝他成功",
+      "source": "网络基础语",
+      "tail": true,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m044",
+      "term": "我不理解",
+      "aliases": [],
+      "year": "2021",
+      "vibes": [
+        "ironic"
+      ],
+      "gloss": "看不懂也不想懂",
+      "usage": "我不理解，但我大受震撼",
+      "source": "网络基础语",
+      "tail": true,
+      "corpus": {
+        "hits": 6,
+        "comment": 0,
+        "danmaku": 6,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m045",
+      "term": "显眼包",
+      "aliases": [],
+      "year": "2023",
+      "vibes": [
+        "cute",
+        "abstract"
+      ],
+      "gloss": "爱出风头又有点好笑的人",
+      "usage": "全场最大的显眼包",
+      "source": "2023十大流行语",
+      "tail": true,
+      "corpus": {
+        "hits": 5,
+        "comment": 0,
+        "danmaku": 5,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m046",
+      "term": "尊嘟假嘟",
+      "aliases": [],
+      "year": "2023",
+      "vibes": [
+        "cute"
+      ],
+      "gloss": "真的假的，卖萌版",
+      "usage": "尊嘟假嘟？",
+      "source": "2023网络热梗",
+      "tail": true,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m047",
+      "term": "那咋了",
+      "aliases": [],
+      "year": "2024",
+      "vibes": [
+        "slacker",
+        "abstract"
+      ],
+      "gloss": "就这样，你能怎样",
+      "usage": "迟到了，那咋了",
+      "source": "2024网络热梗",
+      "tail": true,
+      "corpus": {
+        "hits": 15,
+        "comment": 4,
+        "danmaku": 11,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m048",
+      "term": "栓Q",
+      "aliases": [],
+      "year": "2022",
+      "vibes": [
+        "abstract"
+      ],
+      "gloss": "thank you的空耳，常带无语",
+      "usage": "我真的栓Q",
+      "source": "2022网络热梗",
+      "tail": true,
+      "corpus": {
+        "hits": 7,
+        "comment": 0,
+        "danmaku": 7,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m049",
+      "term": "退退退",
+      "aliases": [],
+      "year": "2022",
+      "vibes": [
+        "cute",
+        "abstract"
+      ],
+      "gloss": "驱赶晦气/劝退的咒语式表达",
+      "usage": "霉运退退退",
+      "source": "2022网络热梗",
+      "tail": true,
+      "corpus": {
+        "hits": 2,
+        "comment": 1,
+        "danmaku": 1,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m050",
+      "term": "city不city",
+      "aliases": [],
+      "year": "2024",
+      "vibes": [
+        "abstract"
+      ],
+      "gloss": "洋气不洋气",
+      "usage": "这身穿搭city不city",
+      "source": "2024网络热梗",
+      "tail": false,
+      "corpus": {
+        "hits": 1,
+        "comment": 0,
+        "danmaku": 1,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m051",
+      "term": "内卷",
+      "aliases": [
+        "卷"
+      ],
+      "year": "2020",
+      "vibes": [
+        "work"
+      ],
+      "gloss": "过度竞争、无效竞争",
+      "usage": "别再卷了",
+      "source": "2020十大流行语",
+      "tail": false,
+      "corpus": {
+        "hits": 2534,
+        "comment": 149,
+        "danmaku": 2385,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m052",
+      "term": "躺平",
+      "aliases": [],
+      "year": "2021",
+      "vibes": [
+        "slacker"
+      ],
+      "gloss": "不再过度竞争，低欲望休息",
+      "usage": "今天只想躺平",
+      "source": "2021十大流行语",
+      "tail": false,
+      "corpus": {
+        "hits": 23,
+        "comment": 3,
+        "danmaku": 20,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m053",
+      "term": "摆烂",
+      "aliases": [],
+      "year": "2022",
+      "vibes": [
+        "slacker"
+      ],
+      "gloss": "干脆不管了，任其糟糕",
+      "usage": "直接摆烂",
+      "source": "2022十大流行语",
+      "tail": false,
+      "corpus": {
+        "hits": 21,
+        "comment": 9,
+        "danmaku": 12,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m054",
+      "term": "画饼",
+      "aliases": [],
+      "year": "2021",
+      "vibes": [
+        "work"
+      ],
+      "gloss": "只给承诺不兑现",
+      "usage": "老板又开始画饼",
+      "source": "网络基础语",
+      "tail": false,
+      "corpus": {
+        "hits": 2,
+        "comment": 1,
+        "danmaku": 1,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m055",
+      "term": "偷感",
+      "aliases": [],
+      "year": "2024",
+      "vibes": [
+        "cute",
+        "work"
+      ],
+      "gloss": "做事偷偷摸摸怕被看见的感觉",
+      "usage": "我发朋友圈很有偷感",
+      "source": "2024网络热梗",
+      "tail": true,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m056",
+      "term": "松弛感",
+      "aliases": [],
+      "year": "2023",
+      "vibes": [
+        "heal"
+      ],
+      "gloss": "不紧绷、不急躁的状态",
+      "usage": "他身上有种松弛感",
+      "source": "2023十大流行语",
+      "tail": false,
+      "corpus": {
+        "hits": 2,
+        "comment": 1,
+        "danmaku": 1,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m057",
+      "term": "嘴替",
+      "aliases": [],
+      "year": "2023",
+      "vibes": [
+        "heal"
+      ],
+      "gloss": "替我说出了我想说的",
+      "usage": "你是我的互联网嘴替",
+      "source": "2023网络热梗",
+      "tail": false,
+      "corpus": {
+        "hits": 1,
+        "comment": 1,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m058",
+      "term": "搭子",
+      "aliases": [],
+      "year": "2024",
+      "vibes": [
+        "heal"
+      ],
+      "gloss": "特定场景的固定同伴",
+      "usage": "饭搭子、旅游搭子",
+      "source": "2024十大流行语",
+      "tail": false,
+      "corpus": {
+        "hits": 2,
+        "comment": 0,
+        "danmaku": 2,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m059",
+      "term": "空降成功",
+      "aliases": [
+        "空降"
+      ],
+      "year": "2016",
+      "vibes": [
+        "retro"
+      ],
+      "gloss": "跳片头直接到正片",
+      "usage": "空降成功，感谢指挥部",
+      "source": "B站弹幕常青梗",
+      "tail": false,
+      "corpus": {
+        "hits": 367,
+        "comment": 1,
+        "danmaku": 366,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m060",
+      "term": "前方高能",
+      "aliases": [],
+      "year": "2015",
+      "vibes": [
+        "retro"
+      ],
+      "gloss": "提醒后面有刺激内容",
+      "usage": "前方高能预警",
+      "source": "B站弹幕常青梗",
+      "tail": false,
+      "corpus": {
+        "hits": 672,
+        "comment": 3,
+        "danmaku": 669,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m061",
+      "term": "泪目",
+      "aliases": [],
+      "year": "2015",
+      "vibes": [
+        "broken"
+      ],
+      "gloss": "看到想哭",
+      "usage": "看到这里泪目了",
+      "source": "B站弹幕常青梗",
+      "tail": true,
+      "corpus": {
+        "hits": 991,
+        "comment": 32,
+        "danmaku": 959,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m062",
+      "term": "2333",
+      "aliases": [
+        "233"
+      ],
+      "year": "2014",
+      "vibes": [
+        "retro"
+      ],
+      "gloss": "笑，来自猫扑表情编号",
+      "usage": "233333",
+      "source": "B站弹幕常青梗",
+      "tail": false,
+      "corpus": {
+        "hits": 5855,
+        "comment": 204,
+        "danmaku": 5651,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m063",
+      "term": "爷青结",
+      "aliases": [],
+      "year": "2021",
+      "vibes": [
+        "retro"
+      ],
+      "gloss": "爷的青春结束了",
+      "usage": "爷青结",
+      "source": "B站年度弹幕",
+      "tail": false,
+      "corpus": {
+        "hits": 34,
+        "comment": 0,
+        "danmaku": 34,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m064",
+      "term": "我焯",
+      "aliases": [
+        "卧槽"
+      ],
+      "year": "2020",
+      "vibes": [
+        "broken"
+      ],
+      "gloss": "震惊的谐音表达",
+      "usage": "我焯，真的假的",
+      "source": "B站弹幕常青梗",
+      "tail": true,
+      "corpus": {
+        "hits": 3131,
+        "comment": 52,
+        "danmaku": 3079,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m065",
+      "term": "就这",
+      "aliases": [
+        "就这？"
+      ],
+      "year": "2020",
+      "vibes": [
+        "ironic"
+      ],
+      "gloss": "不过如此，挑衅式轻蔑",
+      "usage": "就这？",
+      "source": "网络基础语",
+      "tail": true,
+      "corpus": {
+        "hits": 276,
+        "comment": 57,
+        "danmaku": 219,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m066",
+      "term": "建议改成",
+      "aliases": [],
+      "year": "2022",
+      "vibes": [
+        "ironic"
+      ],
+      "gloss": "弹幕式改写建议，常带调侃",
+      "usage": "建议改成经典",
+      "source": "B站弹幕常青梗",
+      "tail": false,
+      "corpus": {
+        "hits": 5,
+        "comment": 1,
+        "danmaku": 4,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m067",
+      "term": "谁懂啊",
+      "aliases": [
+        "谁懂"
+      ],
+      "year": "2023",
+      "vibes": [
+        "broken"
+      ],
+      "gloss": "求共鸣的感叹",
+      "usage": "谁懂啊，这个转场绝了",
+      "source": "网络基础语",
+      "tail": true,
+      "corpus": {
+        "hits": 121,
+        "comment": 15,
+        "danmaku": 106,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m068",
+      "term": "笑死",
+      "aliases": [
+        "笑不活了"
+      ],
+      "year": "2021",
+      "vibes": [
+        "abstract"
+      ],
+      "gloss": "太好笑",
+      "usage": "笑死，根本停不下来",
+      "source": "网络基础语",
+      "tail": true,
+      "corpus": {
+        "hits": 1381,
+        "comment": 69,
+        "danmaku": 1312,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m069",
+      "term": "离谱他妈给离谱开门",
+      "aliases": [],
+      "year": "2021",
+      "vibes": [
+        "abstract"
+      ],
+      "gloss": "离谱到离谱到家了",
+      "usage": "真是离谱他妈给离谱开门",
+      "source": "网络热梗",
+      "tail": true,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m070",
+      "term": "我裂开了",
+      "aliases": [
+        "裂开"
+      ],
+      "year": "2021",
+      "vibes": [
+        "broken"
+      ],
+      "gloss": "心态崩了",
+      "usage": "我裂开了",
+      "source": "网络基础语",
+      "tail": true,
+      "corpus": {
+        "hits": 147,
+        "comment": 9,
+        "danmaku": 138,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m071",
+      "term": "好家伙",
+      "aliases": [],
+      "year": "2020",
+      "vibes": [
+        "ironic"
+      ],
+      "gloss": "惊讶又有点无语",
+      "usage": "好家伙，直接好家伙",
+      "source": "网络基础语",
+      "tail": true,
+      "corpus": {
+        "hits": 712,
+        "comment": 24,
+        "danmaku": 688,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m072",
+      "term": "格局打开",
+      "aliases": [
+        "格局小了"
+      ],
+      "year": "2022",
+      "vibes": [
+        "work"
+      ],
+      "gloss": "看问题的高度，常用来调侃",
+      "usage": "格局打开",
+      "source": "网络热梗",
+      "tail": false,
+      "corpus": {
+        "hits": 2,
+        "comment": 1,
+        "danmaku": 1,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m073",
+      "term": "真的很city",
+      "aliases": [],
+      "year": "2024",
+      "vibes": [
+        "abstract"
+      ],
+      "gloss": "真的很洋气",
+      "usage": "这波真的很city",
+      "source": "2024网络热梗",
+      "tail": false,
+      "corpus": {
+        "hits": 0,
+        "comment": 0,
+        "danmaku": 0,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m074",
+      "term": "绝了",
+      "aliases": [],
+      "year": "2020",
+      "vibes": [
+        "abstract"
+      ],
+      "gloss": "到极点，可夸可贬",
+      "usage": "这个转场绝了",
+      "source": "网络基础语",
+      "tail": true,
+      "corpus": {
+        "hits": 479,
+        "comment": 23,
+        "danmaku": 456,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m075",
+      "term": "啊？",
+      "aliases": [
+        "哈？"
+      ],
+      "year": "2026",
+      "vibes": [
+        "abstract"
+      ],
+      "gloss": "对离谱反转的集体反应",
+      "usage": "看到离谱反转时只发一个啊",
+      "source": "人民网·B站春晚弹幕",
+      "tail": false,
+      "corpus": {
+        "hits": 839,
+        "comment": 50,
+        "danmaku": 789,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m076",
+      "term": "已阅",
+      "aliases": [],
+      "year": "2023",
+      "vibes": [
+        "ironic"
+      ],
+      "gloss": "看到了，不打算多评价",
+      "usage": "已阅，下一个",
+      "source": "网络基础语",
+      "tail": true,
+      "corpus": {
+        "hits": 2,
+        "comment": 1,
+        "danmaku": 1,
+        "videos": 309
+      }
+    },
+    {
+      "id": "m077",
+      "term": "白嫖",
+      "aliases": [],
+      "year": "2019",
+      "vibes": [
+        "abstract"
+      ],
+      "gloss": "不付费享受内容",
+      "usage": "白嫖党报到",
+      "source": "B站弹幕常青梗",
+      "tail": true,
+      "corpus": {
+        "hits": 1101,
+        "comment": 32,
+        "danmaku": 1069,
+        "videos": 309
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "dsh-fish-tone",
+  "version": "0.2.1",
+  "private": true,
+  "description": "双向鱼群拓扑 · 人味插件，以及它的性格附属包",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "node --import ./packages/dsh-fish-tone/tools/preload.mjs --test packages/*/test/*.test.mjs"
+  },
+  "os": [
+    "linux",
+    "darwin",
+    "win32"
+  ],
+  "license": "MIT"
+}
