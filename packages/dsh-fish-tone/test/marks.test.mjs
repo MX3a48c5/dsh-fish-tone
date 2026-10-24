@@ -10,10 +10,10 @@ test('scanMarks：数出关系和留白两类', () => {
 })
 
 test('insertMarks：第一人称后面补「也」，别的字不碰', () => {
-  const r = insertMarks('我试过这个 代码里不能加', { level: 'max', seed: 3 })
+  const r = insertMarks('我试过这个 明天再说', { level: 'max', seed: 3 })
   assert.equal(r.count, 1)
   assert.match(r.text, /我[也还]试过这个/)
-  assert.match(r.text, /代码里不能加/)
+  assert.match(r.text, /明天再说/)
 })
 
 test('insertMarks：已经有标记的不重复插', () => {
@@ -24,7 +24,7 @@ test('insertMarks：已经有标记的不重复插', () => {
 test('insertMarks：评价副词前面补「好像」，句子没有评价就不补', () => {
   const a = insertMarks('这个插件挺麻烦', { level: 'max', seed: 3 })
   assert.match(a.text, /好像挺麻烦/)
-  const b = insertMarks('写完了才发现全是错的', { level: 'max', seed: 3 })
+  const b = insertMarks('写完了才发现错了', { level: 'max', seed: 3 })
   assert.equal(b.count, 0, b.text)
 })
 
@@ -42,4 +42,28 @@ test('markDensity：留白类分开算，并给出真人参照线', () => {
   assert.ok(d.hedge > 0)
   assert.ok(d.hedgeline > 0)
   assert.equal(MARKS.find((m) => m.ch === '也').kind, 'relate')
+})
+
+test('insertMarks：加强组 —— 根本不 / 全都 / 简直', () => {
+  const a = insertMarks('代码里不能加', { level: 'max', seed: 3 })
+  assert.match(a.text, /根本不能加/, a.text)
+
+  const b = insertMarks('加的东西后来全删了', { level: 'max', seed: 3 })
+  assert.match(b.text, /全都删了/, b.text)
+
+  const c = insertMarks('塞完读起来像个不识字的人', { level: 'max', seed: 3 })
+  assert.match(c.text, /(根本|简直)/, c.text)
+})
+
+test('insertMarks：已经有加强词就不再叠', () => {
+  const r = insertMarks('代码里根本不能加', { level: 'max', seed: 3 })
+  assert.equal(r.count, 0, r.text)
+  const q = insertMarks('真的特别麻烦', { level: 'max', seed: 3 })
+  assert.ok(!/特别特别/.test(q.text), q.text)
+})
+
+test('markDensity：加强类单独一个数', () => {
+  const d = markDensity('根本不行，简直了')
+  assert.ok(d.intensify > 0)
+  assert.ok(d.intensifyLine > 0)
 })

@@ -27,6 +27,16 @@ export const MARKS = [
   { ch: '感觉', kind: 'hedge', human: 0.7, ai: 0.24, why: '标出这是感受不是结论' },
   { ch: '可能', kind: 'hedge', human: 0.53, ai: 0.17, why: '留个口子' },
   { ch: '估计', kind: 'hedge', human: 0.07, ai: 0.03, why: '猜，并且承认是猜' },
+  // 加强组：人夸张，AI 校准。这几个真人用得比 AI 多一个量级。
+  { ch: '根本', kind: 'intensify', human: 0.15, ai: 0.03, why: '「根本不识字」—— 把描述改成吐槽' },
+  { ch: '全都', kind: 'intensify', human: 0.04, ai: 0.0, why: '范围说满' },
+  { ch: '简直', kind: 'intensify', human: 0.07, ai: 0.01, why: '夸张一步' },
+  { ch: '特别', kind: 'intensify', human: 0.17, ai: 0.02, why: '程度往上抬一格' },
+  { ch: '贼', kind: 'intensify', human: 0.07, ai: 0.0, why: '口语的极端程度' },
+  { ch: '巨', kind: 'intensify', human: 0.09, ai: 0.0, why: '同上，更年轻' },
+  { ch: '竟然', kind: 'intensify', human: 0.07, ai: 0.01, why: '反预期' },
+  { ch: '到底', kind: 'intensify', human: 0.14, ai: 0.02, why: '问句里的追问' },
+  { ch: '明明', kind: 'intensify', human: 0.08, ai: 0.02, why: '先摆事实再反驳' },
 ]
 
 const MB = new Map(MARKS.map((m) => [m.ch, m]))
@@ -50,6 +60,14 @@ function clauses(text) {
 const VERB_HEAD = /^(试|用|写|看|觉得|以为|发现|跑|玩|弄|改|删|装|做|算|说|想|买|学|读|翻|遇到|踩|卡)/
 /// 评价副词前面补「好像」最轻（挺麻烦 → 好像挺麻烦）
 const HEDGE_HEAD = /(挺|有点|很|太)/
+/// 已经带了加强词就不再加
+const INTENSIFIED = /(根本|全都|简直|特别|贼|巨|非常|十分|极其)/
+/// 「不」后面这些是连词/习惯搭配，补「根本」会变成病句
+const NOT_PLAIN = /不(是|但|过|管|仅|同|少|断|久|光|如|乏|及|去|要|好)/
+/// 「全」后面这些是名词，不能补「都」
+const QUAN_NOUN = /全(部|国|球|文|班|体|新|程|家|员|局|网|校|年|天|月)/
+/// 全 + 这些动词 → 全都 + 动词
+const QUAN_VERB = /全(?=[删改看用给扔换清跑丢忘写说吃拿做整是有在没])/
 
 /**
  * 数一遍微标记。
@@ -72,17 +90,21 @@ export function markDensity(text) {
   const chars = Math.max(1, src.length)
   let relate = 0
   let hedge = 0
+  let intensify = 0
   for (const row of scanMarks(src)) {
     if (row.kind === 'relate') relate += row.count
+    else if (row.kind === 'intensify') intensify += row.count
     else hedge += row.count
   }
   return {
     chars,
     relate: +((relate / chars) * 1000).toFixed(2),
     hedge: +((hedge / chars) * 1000).toFixed(2),
-    // 真人 5 个关系标记、不到 2 个留白标记；这里给两个参照线
+    intensify: +((intensify / chars) * 1000).toFixed(2),
+    // 真人：关系约 5/千字，留白约 2/千字，加强约 0.9/千字
     relateLine: 6.8,
     hedgeline: 2.0,
+    intensifyLine: 0.9,
   }
 }
 
@@ -139,6 +161,43 @@ export function insertMarks(text, opts = {}) {
         if (h && h.index > 0 && !OCCUPIED.test(body)) {
           body = body.slice(0, h.index) + '好像' + body.slice(h.index)
           hits.push({ ch: '好像', body: body.slice(0, 20) })
+          rebuilt += body + c.sep
+          continue
+        }
+        // 三、加强语气。人一激动就往下加词，AI 从头到尾都是同一个音量。
+        if (!INTENSIFIED.test(body)) {
+          // 根本不 X ——「像个不识字的人」→「像个根本不识字的人」
+          const neg = /不/.exec(body)
+          if (neg && !NOT_PLAIN.test(body.slice(neg.index, neg.index + 2)) && body.length >= 6) {
+            body = body.slice(0, neg.index) + '根本' + body.slice(neg.index)
+            hits.push({ ch: '根本', body: body.slice(0, 20) })
+            rebuilt += body + c.sep
+            continue
+          }
+          // 全 X → 全都 X ——「东西后来全删了」→「…全都删了」
+          const quan = QUAN_VERB.exec(body)
+          if (quan && !QUAN_NOUN.test(body.slice(quan.index, quan.index + 2))) {
+            body = body.slice(0, quan.index + 1) + '都' + body.slice(quan.index + 1)
+            hits.push({ ch: '全都', body: body.slice(0, 20) })
+            rebuilt += body + c.sep
+            continue
+          }
+          // 像 → 简直像
+          const xiang = /像(?=[\u4e00-\u9fff])/.exec(body)
+          if (xiang && xiang.index > 0) {
+            body = body.slice(0, xiang.index) + '简直' + body.slice(xiang.index)
+            hits.push({ ch: '简直', body: body.slice(0, 20) })
+            rebuilt += body + c.sep
+            continue
+          }
+          // 很/非常 → 特别 / 贼 / 巨
+          const deg = /(很|非常)/.exec(body)
+          if (deg && deg.index > 0) {
+            const pick = ['特别', '贼', '巨'][Math.floor(rng() * 3)]
+            const word = pick === '巨' && body.length < 10 ? '特别' : pick
+            body = body.slice(0, deg.index) + word + body.slice(deg.index + deg[0].length)
+            hits.push({ ch: word, body: body.slice(0, 20) })
+          }
         }
       }
       rebuilt += body + c.sep
