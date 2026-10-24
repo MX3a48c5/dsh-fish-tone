@@ -41,10 +41,13 @@ const LEVELS = {
  * weight 只是相对频率，ok 才是硬闸。
  */
 const PARTICLES = [
-  { ch: '啦', weight: 3 },
-  { ch: '啊', weight: 3 },
-  { ch: '嘛', weight: 2, ok: (s) => !WH_WORD.test(s) },
-  { ch: '吧', weight: 1, ok: (s) => !WH_WORD.test(s) && isSuggestion(s) },
+  // 权重不是拍脑袋：100 万条语料里，评论结尾的语气词占比是
+  // 的 3.67% > 啊 2.55% > 吧 1.96% > 呢 0.89% > 呀 0.48% > 啦 0.25% > 嘛 0.23%
+  // 「啦」「嘛」看着可爱，真人其实很少用 —— 上一版权重把它们调重了，这就是 AI 味的来源之一。
+  { ch: '啊', weight: 4 },
+  { ch: '啦', weight: 1 },
+  { ch: '嘛', weight: 1, ok: (s) => !WH_WORD.test(s) },
+  { ch: '吧', weight: 2, ok: (s) => !WH_WORD.test(s) && isSuggestion(s) },
 ]
 
 /** 特指问的标志词。这类句子后面挂「吧」「嘛」直接变病句（"你干什么了吧"）。 */
@@ -108,7 +111,7 @@ function tailCandidates(body) {
     if (p.ok && !p.ok(s)) continue
     for (let i = 0; i < (p.weight ?? 1); i++) out.push(p.ch)
   }
-  if (canTakeDe(s)) out.push('的', '的')
+  if (canTakeDe(s)) out.push('的', '的', '的', '的')
   return out
 }
 

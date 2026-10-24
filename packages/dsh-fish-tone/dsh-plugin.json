@@ -3,7 +3,7 @@
   "manifestVersion": "0.15",
   "id": "dsh-fish-tone.local",
   "name": "dsh-fish-tone",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "MIT",
   "description": "双向鱼群拓扑 · 人味插件:每句话只跟前后两句握手,握完就学会犹豫,句尾挂一点没用的东西",
   "facets": {
