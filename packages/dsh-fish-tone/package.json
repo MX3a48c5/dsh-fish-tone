@@ -1,6 +1,6 @@
 {
   "name": "dsh-fish-tone",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "双向鱼群拓扑 · 人味插件：把话往人的方向掰一点点（带设置页）",
   "type": "module",
   "main": "lib/index.js",
