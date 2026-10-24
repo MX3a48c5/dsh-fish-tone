@@ -1,6 +1,6 @@
 {
   "name": "dsh-fish-tone",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": true,
   "description": "双向鱼群拓扑 · 人味插件，以及它的性格附属包",
   "type": "module",

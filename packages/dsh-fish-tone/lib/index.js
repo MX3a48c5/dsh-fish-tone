@@ -18,6 +18,7 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { repair, scan, budgetFor, frameStats, FRAMES } from './grammar.js'
+import { thin as thinStructures, scan as scanStructures, density as structureDensity } from './structures.js'
 
 export const name = 'dsh-fish-tone'
 
@@ -374,6 +375,7 @@ const PROMPT = `## 说话的松紧（人味插件）
 - **废话要有，但少。** 一天多说三百句废话的人通常让人烦，不是让人喜欢。
 - **语病不是零，但也很少。** 十条句子里六到八条干净，剩下几条留一点毛毛刺：不到三百字的短回复一个都不留（真人发短评也不犯书面语病），三百字以上，八百字里最多一个不明显的（重复一个字、语气词叠一下）；两千字才允许一个明显的（量词打架、把话说反）。全干净像校对稿，全脏是没写。
 - **越没用越像人 —— 只在闲聊、评论、动态、闲聊式解释里成立。** 写代码、报数字、贴路径、给结论的时候，一个字都别加。
+- **结构腔按密度算，不是禁用**。「不是X而是Y」「最…的是」「先…再…」真人也说，但真人是每千字 0.05～0.08 个 —— 一篇 500 字的回复里出现一次，就已经是真人密度的两倍多了。原则：这些框架只在真的需要纠正、对比、排步骤时用，说完了就往下走，别每段都摆一个。
 - **双向鱼群拓扑：每句话只跟它前后两句握手。** 别为了「整段风格统一」回头去改已经说出口的话 —— 那是排版，不是说话。
 - 用户明确要求严谨、正式，或者这就是一份报告时，这一节整节失效。`
 
@@ -576,8 +578,23 @@ export function apply(root, config = {}) {
           outText = g.text
           grammar = { found: g.found, fixed: g.fixed, kept: g.kept, injected: g.injected, budget: g.budget }
         }
+        // 结构腔：不是禁，是压密度。代码块、路径、行内代码整行不碰。
+        let fence = false
+        const skipLine = (line) => {
+          if (/^\s*(```|~~~)/.test(line)) { fence = !fence; return true }
+          if (fence) return true
+          if (line.includes('`') || line.includes('http')) return true
+          return isStructuralLine(line)
+        }
+        const st = thinStructures(outText, { skip: skipLine })
+        outText = st.text
+        const structures = {
+          thinned: st.thinned,
+          over: st.over,
+          density: structureDensity(outText),
+        }
         if (args?.format === 'json') {
-          return { ok: true, text: JSON.stringify({ text: outText, stats, grammar }, null, 2) }
+          return { ok: true, text: JSON.stringify({ text: outText, stats, grammar, structures }, null, 2) }
         }
         return { ok: true, text: outText }
       },
