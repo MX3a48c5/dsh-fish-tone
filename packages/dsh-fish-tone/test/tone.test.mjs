@@ -201,15 +201,17 @@ test('stats.particles 跟挂出去的尾巴对得上', () => {
 
 /* ───────────── 第三层：插件把东西挂上了吗 ───────────── */
 
-test('apply() 挂了一节 prompt 和一个工具', () => {
+test('apply() 挂了一节 prompt、三个工具和一个技能', () => {
   const sections = []
   const tools = []
+  const skills = []
   const root = {
     inject(_deps, fn) {
       fn({
         effect: (f) => { const d = f(); return typeof d === 'function' ? d : () => {} },
         systemPrompt: { section: (s) => sections.push(s) },
         tools: { register: (t) => tools.push(t) },
+        skills: { register: (k) => { skills.push(k); return () => {} } },
       })
     },
   }
@@ -219,10 +221,17 @@ test('apply() 挂了一节 prompt 和一个工具', () => {
   assert.equal(sections[0].name, 'fish-tone:voice')
   assert.ok(Number.isFinite(sections[0].order))
   assert.ok(sections[0].text.includes('双向鱼群拓扑'))
+  assert.ok(sections[0].text.includes('fish_judge'), 'prompt 要提到判断工具')
 
-  assert.equal(tools.length, 2, '现在挂了 fish_tone 和 fish_grammar 两个工具')
+  assert.equal(tools.length, 3, '现在挂了 fish_tone、fish_grammar、fish_judge 三个工具')
   const names = tools.map((t) => t.name).sort()
-  assert.deepEqual(names, ['fish_grammar', 'fish_tone'])
+  assert.deepEqual(names, ['fish_grammar', 'fish_judge', 'fish_tone'])
+
+  assert.equal(skills.length, 1)
+  assert.equal(skills[0].name, 'fish-sense')
+  assert.ok(skills[0].description.length > 0)
+  assert.ok(skills[0].content.includes('扎堆'), '技能正文要有扎堆那节')
+  assert.ok(skills[0].whenToUse.includes('不是'), 'whenToUse 要写清什么时候用')
   const tone = tools.find((t) => t.name === 'fish_tone')
   assert.deepEqual(tone.parameters.required, ['text'])
   assert.equal(typeof tone.execute, 'function')
@@ -299,4 +308,31 @@ test('「的」只跟在形容词谓语后面', () => {
     const verb = applyTone('我下午去现场。', { strength: 'max', seed }).text
     assert.equal(/现场[的]/.test(verb), false, `seed ${seed}: ${verb}`)
   }
+})
+
+test('fish_judge 工具能跑出判断（不删字，只报处境和问题）', async () => {
+  const tools = []
+  const root = {
+    inject(_deps, fn) {
+      fn({
+        effect: (f) => { const d = f(); return typeof d === 'function' ? d : () => {} },
+        systemPrompt: { section: () => {} },
+        tools: { register: (t) => tools.push(t) },
+        skills: { register: () => () => {} },
+      })
+    },
+  }
+  apply(root, { strength: 'normal', seed: 5 })
+  const judge = tools.find((t) => t.name === 'fish_judge')
+  const draft = '这个视频不是讲技巧，而是讲方法。最值得的是它先量再改——本质上是个校准器。'
+  const r = await judge.execute({ text: draft })
+  assert.equal(r.ok, true)
+  assert.ok(r.text.includes('[判断]'), r.text)
+  assert.ok(r.text.includes('[要你自己答]'), r.text)
+  assert.ok(!r.text.includes(draft.slice(0, 10)), '判断工具不该原样回吐/改写字')
+
+  const j = await judge.execute({ text: draft, format: 'json' })
+  const v = JSON.parse(j.text)
+  assert.equal(v.band, 'template')
+  assert.ok(v.hits.every((h) => ['keep', 'ask', 'cut', 'count'].includes(h.verdict)))
 })

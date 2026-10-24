@@ -19,6 +19,7 @@ import { fileURLToPath } from 'node:url'
 
 import { repair, scan, budgetFor, frameStats, FRAMES } from './grammar.js'
 import { thin as thinStructures, scan as scanStructures, density as structureDensity } from './structures.js'
+import { assess as judgeAssess, render as judgeRender } from './judge.js'
 
 export const name = 'dsh-fish-tone'
 
@@ -375,11 +376,74 @@ const PROMPT = `## 说话的松紧（人味插件）
 - **废话要有，但少。** 一天多说三百句废话的人通常让人烦，不是让人喜欢。
 - **语病不是零，但也很少。** 十条句子里六到八条干净，剩下几条留一点毛毛刺：不到三百字的短回复一个都不留（真人发短评也不犯书面语病），三百字以上，八百字里最多一个不明显的（重复一个字、语气词叠一下）；两千字才允许一个明显的（量词打架、把话说反）。全干净像校对稿，全脏是没写。
 - **越没用越像人 —— 只在闲聊、评论、动态、闲聊式解释里成立。** 写代码、报数字、贴路径、给结论的时候，一个字都别加。
-- **结构腔按密度算，不是禁用**。「不是X而是Y」「最…的是」「先…再…」真人也说，但真人是每千字 0.05～0.08 个 —— 一篇 500 字的回复里出现一次，就已经是真人密度的两倍多了。原则：这些框架只在真的需要纠正、对比、排步骤时用，说完了就往下走，别每段都摆一个。
+- **结构腔先判后压**。「不是X而是Y」「最…的是」「先…再…」真人也说，密度是每千字 0.05～0.08 个。但比例不是关键 —— 关键是**同一段里换着用不同句式**：真人会重复自己的习惯，AI 会轮换工具箱。拿不准一处该不该留，调 fish_judge 看它在文里干什么活；判断流程在 fish-sense 那节里。
 - **双向鱼群拓扑：每句话只跟它前后两句握手。** 别为了「整段风格统一」回头去改已经说出口的话 —— 那是排版，不是说话。
 - 用户明确要求严谨、正式，或者这就是一份报告时，这一节整节失效。`
 
 /* ───────────────────────── 插件入口 ───────────────────────── */
+
+/* ───────────────────── 判断机制（skill） ───────────────────── */
+
+/** 挂进技能目录的那一节。写的时候用，不是写完了当检查表用。 */
+const SKILL_BODY = `# 人味判断
+
+配额是数出来的，判断是问出来的。数只看总数，看不见「一段里连换三种句式」—— 那才是 AI 味的真身。
+
+## 一、每处命中先过一遍：它在干什么
+
+真人用框架，是因为有这个活要干；AI 用框架，是因为想要那种分量。
+
+| 这句在干的事 | 框架成立吗 |
+|---|---|
+| 纠正一个真实存在的误会 | 成立，但前文得真的有人这么想 |
+| 在两个真实候选里挑一个 | 成立，但前面得真的列出来过 |
+| 排两步真的有先后的动作 | 成立 |
+| 给结论加分量 | 不成立，拆成陈述句 |
+| 把上一句换个说法再说一遍 | 不成立，删掉多的那句 |
+| 单纯想显得有见解 | 不成立，这是最典型的 AI 腔 |
+
+判完再问一句：**把框架拆了，信息少了吗？** 不少就删；少了就换个说法，别留壳。
+
+## 二、「不是…而是…」的单独规矩
+
+它唯一的正当用途是**纠错**：读者心里已经有一个错的版本，你把它掰过来。
+用它之前先确认前文种下了那个错版本 —— 是谁这么想的？说得出吗？说不出，就是自造的对比。
+
+## 三、比总数更准的信号：扎堆
+
+同一段里换着用不同句式，比同一种句式用两次更像 AI。真人重复自己的习惯，AI 轮换工具箱。
+
+- 100 字窗口里 ≥2 种不同句式 → 停下来，八成有一段是为了好看写的
+- ≥3 种 → 这段要重写，不是删一个的事
+
+实测：真人长篇里只有 5.6% 会这样扎堆，AI 评论 19.6%。
+
+## 四、密度跟同一种文体比，不跟全局平均比
+
+闲聊 0.8/千字 · 随手记 1.3 · 解释 2.0 · 论证 2.4 · 步骤 2.6（真人实测；AI 评论是 12.8）
+
+所以技术说明里出现两个「先…再…」未必超标，40 字的动态里出现一个就是怪。
+
+## 五、句式之外还有几种味（这个工具看不见，你自己看）
+
+同一批 AI 评论和真人评论放一起比：中位长度 53 字对 23 字；一半以上以「@某人」开头；先复述对方说过的内容，再给一个评价；表情用得比真人少，标点却收得比真人齐。
+
+这几样单拿出来都不算错，叠在一起才是味。写完读一遍，问一句：我这段是在回应，还是在表演回应？
+
+## 六、拿不准就调 fish_judge
+
+它给三样东西：文体和基线、每一处命中的处境、要你自己答的问题。它不替你决定，也不删你的字。
+`
+
+const JUDGE_DESCRIPTION = `判一段话有没有 AI 味 —— 但不是数句式，是看每一处该不该有。
+
+给三样东西：这段是什么文体、真人在这种文体里的密度是多少；每一处命中的处境（前面有没有那个误会 / 那两个候选 / 那两步动作）；以及要你自己答的问题。它不替你决定，也不改你的字。
+
+比总数更准的信号是**扎堆**：同样 100 字里出现两种以上不同句式 —— 真人长篇只有 5.6% 这样，AI 评论 19.6%。真人重复自己的习惯，AI 轮换工具箱。
+
+Use it when a draft has 「不是…而是…」「最…的是」「先…再…」, several frames near each other, or when you want a second opinion before shipping text that should sound human. Judgment procedure lives in the fish-sense skill.
+
+- format: text（默认，判断 + 逐处 + 问题）| json（结构化）`
 
 const TOOL_DESCRIPTION = `把一段话往「人的方向」掰一点点（双向鱼群拓扑 · 人味插件）。
 
@@ -586,11 +650,17 @@ export function apply(root, config = {}) {
           if (line.includes('`') || line.includes('http')) return true
           return isStructuralLine(line)
         }
-        const st = thinStructures(outText, { skip: skipLine })
+        // 判断归判断，兜底归兜底：只有判成模板腔才动手压，
+        // 平时一处两处的留给写的人自己判 —— 压出来的均匀本身也是机器味。
+        const before = judgeAssess(outText)
+        const st = before.band === 'template'
+          ? thinStructures(outText, { skip: skipLine })
+          : { text: outText, thinned: 0, over: [] }
         outText = st.text
         const structures = {
           thinned: st.thinned,
           over: st.over,
+          judged: before.band,
           density: structureDensity(outText),
         }
         if (args?.format === 'json') {
@@ -674,6 +744,58 @@ Use it when the user asks 校对/查语病/改病句，或者你想确认一句�
         }
       },
     })
+
+    ctx.tools.register({
+      name: 'fish_judge',
+      description: JUDGE_DESCRIPTION,
+      parameters: {
+        type: 'object',
+        properties: {
+          text: { type: 'string', description: '要判的那段话。整段传进来，别先删掉可疑的句子 —— 那正是要判的东西。' },
+          format: {
+            type: 'string',
+            enum: ['text', 'json'],
+            description: 'text 默认给判断清单；json 给结构化（含每处的 verdict：keep / ask / cut）。',
+          },
+        },
+        required: ['text'],
+      },
+      output: {
+        schema: {
+          type: 'object',
+          additionalProperties: false,
+          required: ['ok', 'text'],
+          properties: { ok: { type: 'boolean' }, text: { type: 'string' } },
+        },
+        render: (_args, value) => [{ type: 'text', text: String(value?.text ?? '') }],
+      },
+      execute: async (args) => {
+        const src = String(args?.text ?? '')
+        if (!src.trim()) return { ok: false, text: '没有收到文字（text 是空的）。' }
+        const v = judgeAssess(src)
+        if (args?.format === 'json') {
+          return { ok: true, text: JSON.stringify(v, null, 2) }
+        }
+        return { ok: true, text: judgeRender(v) }
+      },
+    })
+  })
+
+  // 判断机制挂在技能里：不是检查表，是写的时候就照着问的那套流程。
+  root.inject(['skills'], (ctx) => {
+    try {
+      ctx.effect(() => ctx.skills.register({
+        name: 'fish-sense',
+        description: '写中文之前/之后判断一处句式该不该放：先看它在干什么，再看扎堆和密度，最后才决定删还是留。',
+        whenToUse: '一段话里出现了「不是…而是」「最…的是」「先…再…」，或者连着用了几种句式、拿不准要不要留的时候。',
+        content: SKILL_BODY,
+        source: 'runtime',
+        resourceBase: { kind: 'opaque', description: 'dsh-fish-tone 插件内置' },
+      }), 'dsh-fish-tone: fish-sense 技能')
+      logLine('已挂 fish-sense 技能')
+    } catch (e) {
+      logLine('挂 fish-sense 技能失败：' + (e?.message ?? String(e)))
+    }
   })
 
   root.inject(['webServer'], (ctx) => {
