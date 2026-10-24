@@ -46,13 +46,13 @@ test('markDensity：留白类分开算，并给出真人参照线', () => {
 
 test('insertMarks：加强组 —— 根本不 / 全都 / 简直', () => {
   const a = insertMarks('代码里不能加', { level: 'max', seed: 3 })
-  assert.match(a.text, /根本不能加/, a.text)
+  assert.match(a.text, /(根本|压根)不能加/, a.text)
 
   const b = insertMarks('加的东西后来全删了', { level: 'max', seed: 3 })
   assert.match(b.text, /全都删了/, b.text)
 
   const c = insertMarks('塞完读起来像个不识字的人', { level: 'max', seed: 3 })
-  assert.match(c.text, /(根本|简直)/, c.text)
+  assert.match(c.text, /(根本|压根|简直)/, c.text)
 })
 
 test('insertMarks：已经有加强词就不再叠', () => {

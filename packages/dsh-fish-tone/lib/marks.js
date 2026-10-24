@@ -68,6 +68,12 @@ const NOT_PLAIN = /不(是|但|过|管|仅|同|少|断|久|光|如|乏|及|去|�
 const QUAN_NOUN = /全(部|国|球|文|班|体|新|程|家|员|局|网|校|年|天|月)/
 /// 全 + 这些动词 → 全都 + 动词
 const QUAN_VERB = /全(?=[删改看用给扔换清跑丢忘写说吃拿做整是有在没])/
+/// 光秃秃的评价形容词（前面没有程度词）
+const BARE_ADJ = /(麻烦|别扭|怪|离谱|干|尴尬|抽象|蠢|傻|难|累|慢|快|贵|香|硬|假|好看|好听|好玩|好用)/
+/// 前面紧挨着程度词就不补
+const HAS_DEGREE = /(挺|很|太|特别|贼|巨|非常|十分|极其|有点|有些|最|更|这么|那么)$/
+/// 能补「稍微」的动词
+const SLIGHT_HEAD = /(改|动|调|等|慢|快|轻|早|晚|多|少|长|短)/
 
 /**
  * 数一遍微标记。
@@ -108,7 +114,7 @@ export function markDensity(text) {
   }
 }
 
-const LEVELS = { off: 0, light: 0.25, normal: 0.45, max: 0.7 }
+const LEVELS = { off: 0, light: 0.3, normal: 0.55, max: 0.85 }
 
 /** 简单可复现的随机数（跟主插件同算法，别改）。 */
 function mulberry32(seed) {
@@ -169,8 +175,12 @@ export function insertMarks(text, opts = {}) {
           // 根本不 X ——「像个不识字的人」→「像个根本不识字的人」
           const neg = /不/.exec(body)
           if (neg && !NOT_PLAIN.test(body.slice(neg.index, neg.index + 2)) && body.length >= 6) {
-            body = body.slice(0, neg.index) + '根本' + body.slice(neg.index)
-            hits.push({ ch: '根本', body: body.slice(0, 20) })
+            const word = rng() < 0.75 ? '根本' : '压根'
+            // 「都/也/还/就」在「不」前面时要插到它前面：「都根本不敢」是病句，「根本都不敢」才对
+            let at = neg.index
+            while (at > 0 && /[都也还就才又]/.test(body[at - 1])) at -= 1
+            body = body.slice(0, at) + word + body.slice(at)
+            hits.push({ ch: word, body: body.slice(0, 20) })
             rebuilt += body + c.sep
             continue
           }
@@ -193,10 +203,27 @@ export function insertMarks(text, opts = {}) {
           // 很/非常 → 特别 / 贼 / 巨
           const deg = /(很|非常)/.exec(body)
           if (deg && deg.index > 0) {
-            const pick = ['特别', '贼', '巨'][Math.floor(rng() * 3)]
-            const word = pick === '巨' && body.length < 10 ? '特别' : pick
+            let word = ['特别', '贼', '巨'][Math.floor(rng() * 3)]
+            if (word === '巨' && body.length < 10) word = '特别'
             body = body.slice(0, deg.index) + word + body.slice(deg.index + deg[0].length)
             hits.push({ ch: word, body: body.slice(0, 20) })
+            rebuilt += body + c.sep
+            continue
+          }
+          // 光秃秃的形容词前面垫一个程度词 ——「读起来别扭」→「读起来特别别扭」
+          const adj = BARE_ADJ.exec(body)
+          if (adj && adj.index > 0 && !HAS_DEGREE.test(body.slice(0, adj.index))) {
+            const word = ['特别', '贼', '巨'][Math.floor(rng() * 3)]
+            body = body.slice(0, adj.index) + word + body.slice(adj.index)
+            hits.push({ ch: word, body: body.slice(0, 20) })
+            rebuilt += body + c.sep
+            continue
+          }
+          // 明明 + 不 ——「就不对」→「明明就不对」
+          const bm = /不/.exec(body)
+          if (bm && bm.index >= 2 && !NOT_PLAIN.test(body.slice(bm.index, bm.index + 2))) {
+            body = body.slice(0, bm.index) + '明明' + body.slice(bm.index)
+            hits.push({ ch: '明明', body: body.slice(0, 20) })
           }
         }
       }
