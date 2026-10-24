@@ -77,5 +77,6 @@ test('render：先结论，再逐处，最后是问题', () => {
   assert.ok(out.includes('[判断]'), out)
   assert.ok(out.includes('[文体]'), out)
   assert.ok(out.includes('[要你自己答]'), out)
+  assert.ok(out.includes('[不动]'), out)
   assert.ok(/[1]\. 「/.test(out), '应有逐处清单')
 })

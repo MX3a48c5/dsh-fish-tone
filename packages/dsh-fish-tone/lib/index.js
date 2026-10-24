@@ -20,6 +20,7 @@ import { fileURLToPath } from 'node:url'
 import { repair, scan, budgetFor, frameStats, FRAMES } from './grammar.js'
 import { thin as thinStructures, scan as scanStructures, density as structureDensity } from './structures.js'
 import { assess as judgeAssess, render as judgeRender } from './judge.js'
+import { insertMarks, markDensity, MARKS } from './marks.js'
 
 export const name = 'dsh-fish-tone'
 
@@ -377,6 +378,8 @@ const PROMPT = `## 说话的松紧（人味插件）
 - **语病不是零，但也很少。** 十条句子里六到八条干净，剩下几条留一点毛毛刺：不到三百字的短回复一个都不留（真人发短评也不犯书面语病），三百字以上，八百字里最多一个不明显的（重复一个字、语气词叠一下）；两千字才允许一个明显的（量词打架、把话说反）。全干净像校对稿，全脏是没写。
 - **越没用越像人 —— 只在闲聊、评论、动态、闲聊式解释里成立。** 写代码、报数字、贴路径、给结论的时候，一个字都别加。
 - **结构腔先判后压**。「不是X而是Y」「最…的是」「先…再…」真人也说，密度是每千字 0.05～0.08 个。但比例不是关键 —— 关键是**同一段里换着用不同句式**：真人会重复自己的习惯，AI 会轮换工具箱。拿不准一处该不该留，调 fish_judge 看它在文里干什么活；判断流程在 fish-sense 那节里。
+- **事实不动。** 改语气的时候不改事实：不补数字、不补经历、不删「可能/据说/通常」这类限定词。改完每个实词都要能在原文里指出出处。
+- **关系要挂出来。** 「我也试过」「好像挺麻烦」—— 一个「也」把对方拉进来，一个「好像」把断言变回猜测。真人说话时一直有个人在听，AI 是把事情说完就停。整段一个留白词都没有，读起来就是句句在下结论。数字、代码、结论里不加。
 - **双向鱼群拓扑：每句话只跟它前后两句握手。** 别为了「整段风格统一」回头去改已经说出口的话 —— 那是排版，不是说话。
 - 用户明确要求严谨、正式，或者这就是一份报告时，这一节整节失效。`
 
@@ -430,7 +433,21 @@ const SKILL_BODY = `# 人味判断
 
 这几样单拿出来都不算错，叠在一起才是味。写完读一遍，问一句：我这段是在回应，还是在表演回应？
 
-## 六、拿不准就调 fish_judge
+## 六、一个词换一种关系
+
+「往里面塞错别字那段我试过」和「…我也试过」，只差一个字，语气全变了。原因是「也」把对方拉进来了：读者会自动接一句「我也是」。
+
+这类词只加关系、不加信息，一共两组：
+
+- **关系组**（把对方/共同经验拉进来）：也、还、反正
+- **留白组**（把断言变回猜测）：好像、应该、感觉、可能、估计
+
+实测：关系组真人和 AI 用得差不多（也 3.40 vs 2.87 / 千字），差别在**位置** —— 真人把它挂在主语后面（我也、你也、这也），AI 挂在别处。
+留白组 AI 明显欠用（应该 0.41 vs 0.08，感觉 0.70 vs 0.24，可能 0.53 vs 0.17）—— 因为 AI 不猜。
+
+用的时候记住三条：一句一个；只在真的可能「对方也一样」时用「也」；留白组别用在事实、数字和结论上。
+
+## 七、拿不准就调 fish_judge
 
 它给三样东西：文体和基线、每一处命中的处境、要你自己答的问题。它不替你决定，也不删你的字。
 `
@@ -467,7 +484,8 @@ code, log output, tables, or anything the user asked to keep formal.
 const HERE = dirname(fileURLToPath(import.meta.url))
 const CONFIG_FILE = process.env.DSH_FISH_TONE_CONFIG || join(HERE, '..', 'config.json')
 
-const DEFAULTS = { enabled: true, strength: 'light', seed: 7, grammar: true }
+const MARKS_LEVELS = { off: true, light: true, normal: true, max: true }
+const DEFAULTS = { enabled: true, strength: 'light', seed: 7, grammar: true, marks: 'light' }
 
 /** 读配置：默认值 ← config.json ← 宿主传进来的 config（只作默认，不覆盖用户改过的）。 */
 function loadConfig(hostConfig = {}) {
@@ -476,10 +494,12 @@ function loadConfig(hostConfig = {}) {
   if (Number.isFinite(hostConfig?.seed)) out.seed = hostConfig.seed
   if (typeof hostConfig?.enabled === 'boolean') out.enabled = hostConfig.enabled
   if (typeof hostConfig?.grammar === 'boolean') out.grammar = hostConfig.grammar
+  if (MARKS_LEVELS[hostConfig?.marks]) out.marks = hostConfig.marks
   try {
     const raw = JSON.parse(readFileSync(CONFIG_FILE, 'utf8'))
     if (typeof raw?.enabled === 'boolean') out.enabled = raw.enabled
     if (typeof raw?.grammar === 'boolean') out.grammar = raw.grammar
+    if (MARKS_LEVELS[raw?.marks]) out.marks = raw.marks
     if (LEVELS[raw?.strength]) out.strength = raw.strength
     if (Number.isFinite(raw?.seed)) out.seed = raw.seed
   } catch { /* 没有文件 / 坏了就用默认 */ }
@@ -491,6 +511,7 @@ function saveConfig(patch) {
   const next = { ...live }
   if (typeof patch?.enabled === 'boolean') next.enabled = patch.enabled
   if (typeof patch?.grammar === 'boolean') next.grammar = patch.grammar
+  if (MARKS_LEVELS[patch?.marks]) next.marks = patch.marks
   if (LEVELS[patch?.strength]) next.strength = patch.strength
   if (Number.isFinite(patch?.seed)) next.seed = Math.trunc(patch.seed)
   mkdirSync(dirname(CONFIG_FILE), { recursive: true })
@@ -599,6 +620,11 @@ export function apply(root, config = {}) {
             description: '掰多少。不传就用设置页里定的那一档。',
           },
           seed: { type: 'number', description: '随机种子；同一个 seed 给同一个结果。不传用设置页里的。' },
+          marks: {
+            type: 'string',
+            enum: ['off', 'light', 'normal', 'max'],
+            description: '补微标记的量（「我也试过」的也、「好像挺麻烦」的好像）。不传用设置页里的。',
+          },
           format: {
             type: 'string',
             enum: ['text', 'json'],
@@ -642,13 +668,22 @@ export function apply(root, config = {}) {
           outText = g.text
           grammar = { found: g.found, fixed: g.fixed, kept: g.kept, injected: g.injected, budget: g.budget }
         }
-        // 结构腔：不是禁，是压密度。代码块、路径、行内代码整行不碰。
+        // 代码块、路径、行内代码整行不碰
         let fence = false
         const skipLine = (line) => {
           if (/^\s*(```|~~~)/.test(line)) { fence = !fence; return true }
           if (fence) return true
           if (line.includes('`') || line.includes('http')) return true
           return isStructuralLine(line)
+        }
+
+        // 微标记：一个词换一种关系（「我试过」→「我也试过」／「挺麻烦」→「好像挺麻烦」）
+        let micro = null
+        const marksLevel = MARKS_LEVELS[args?.marks] ? args.marks : live.marks
+        if (marksLevel && marksLevel !== 'off') {
+          const r = insertMarks(outText, { level: marksLevel, seed, skip: skipLine })
+          outText = r.text
+          micro = { inserted: r.count, hits: r.hits, density: markDensity(outText) }
         }
         // 判断归判断，兜底归兜底：只有判成模板腔才动手压，
         // 平时一处两处的留给写的人自己判 —— 压出来的均匀本身也是机器味。
@@ -664,7 +699,7 @@ export function apply(root, config = {}) {
           density: structureDensity(outText),
         }
         if (args?.format === 'json') {
-          return { ok: true, text: JSON.stringify({ text: outText, stats, grammar, structures }, null, 2) }
+          return { ok: true, text: JSON.stringify({ text: outText, stats, grammar, micro, structures }, null, 2) }
         }
         return { ok: true, text: outText }
       },
@@ -810,6 +845,7 @@ Use it when the user asks 校对/查语病/改病句，或者你想确认一句�
           strength: live.strength,
           seed: live.seed,
           grammar: live.grammar,
+          marks: live.marks,
           levels: Object.keys(LEVELS),
           promptRegistered,
           configFile: CONFIG_FILE,

@@ -15,6 +15,7 @@
  */
 
 import { FRAMES } from './structures.js'
+import { markDensity } from './marks.js'
 
 /* ───────────────────────── 文体与基线 ───────────────────────── */
 
@@ -301,6 +302,7 @@ export function assess(text) {
     over,
     cluster: cl,
     hits: rows,
+    marks: markDensity(src),
     questions: questions.slice(0, 3),
     blind: '这一步只认句式。换个说法把同一句再说一遍、每段都收个小结论、语气齐得不像人 —— 这些它看不见，得你自己读一遍。',
   }
@@ -328,10 +330,15 @@ export function render(v) {
     }
   }
 
+  if (v.marks) {
+    const m = v.marks
+    L.push(`[微标记] 关系类（也/还/反正）${m.relate}/千字，留白类（好像/应该/感觉）${m.hedge}/千字 —— 真人后一类约 2/千字，一个都没有就是句句在下断言`)
+  }
   if (v.questions.length) {
     L.push('[要你自己答]')
     for (const q of v.questions) L.push(`  - ${q}`)
   }
+  L.push('[不动] 比喻、设问、句长参差、被动句、名词化、正文里的「首先/其次」—— 这几样实测人类用得不比 AI 少，一律不改')
   if (v.blind) L.push(`[看不见] ${v.blind}`)
   return L.join('\n')
 }
