@@ -39,5 +39,23 @@
     "darwin",
     "win32"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MX3a48c5/dsh-fish-tone.git",
+    "directory": "packages/dsh-fish-tone"
+  },
+  "homepage": "https://github.com/MX3a48c5/dsh-fish-tone",
+  "bugs": {
+    "url": "https://github.com/MX3a48c5/dsh-fish-tone/issues"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "中文",
+    "人味",
+    "去ai味",
+    "写作",
+    "语气词"
+  ]
 }
