@@ -12,15 +12,16 @@ const mod = await import('../lib/index.js')
 
 /* ───────────── 库本身 ───────────── */
 
-test('库：77 条，字段齐全，vibe 合法', () => {
+test('库：一千条以上，字段齐全，vibe 合法', () => {
   const raw = JSON.parse(readFileSync(new URL('../data/memes.json', import.meta.url), 'utf8'))
   assert.equal(raw.memes.length, raw.count)
-  assert.ok(raw.memes.length >= 60, `只有 ${raw.memes.length} 条`)
+  assert.ok(raw.memes.length >= 1000, `只有 ${raw.memes.length} 条`)
   const vibes = new Set(['cute', 'abstract', 'ironic', 'broken', 'work', 'heal', 'hype', 'retro', 'slacker', 'fun'])
   for (const m of raw.memes) {
     assert.ok(m.term, '缺 term')
-    assert.ok(m.gloss, `${m.term} 缺 gloss`)
+    if (m.known) assert.ok(m.gloss, `${m.term} 标了 known 却没 gloss`)
     assert.ok(m.source, `${m.term} 缺 source`)
+    assert.ok(typeof m.corpus?.hits === 'number', `${m.term} 缺 corpus.hits`)
     assert.ok(Array.isArray(m.vibes) && m.vibes.length > 0, `${m.term} 缺 vibe`)
     for (const v of m.vibes) assert.ok(vibes.has(v), `${m.term} 的 vibe 不认识：${v}`)
   }

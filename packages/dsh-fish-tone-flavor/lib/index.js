@@ -428,11 +428,17 @@ export function apply(root, config = {}) {
           return { ok: true, text: JSON.stringify({ count: list.length, memes: list }, null, 2) }
         }
         if (list.length === 0) return { ok: true, text: '库里没有对上的梗。要么换个词，要么这个梗还没进库。' }
-        const one = (m) => m.kind === 'construction'
-          ? `· ${m.term}${m.template ? `  ${m.template}` : ''}\n  ${m.gloss}\n  例：${m.usage}`
-            + `\n  语料：评论 ${m.corpus.comment} 次 / 弹幕 ${m.corpus.danmaku} 次`
-          : `· ${m.term}${m.year ? `（${m.year}）` : ''} — ${m.gloss}\n  用法：${m.usage}`
-            + `\n  来源：${m.source}${m.corpus?.hits ? `；本地语料出现 ${m.corpus.hits} 次 / ${m.corpus.videos} 个视频` : '；本地语料没见到'}`
+        const one = (m) => {
+          if (m.kind === 'construction') {
+            return `· ${m.term}${m.template ? `  ${m.template}` : ''}\n  ${m.gloss}\n  例：${m.usage}`
+              + `\n  语料：评论 ${m.corpus.comment} 次 / 弹幕 ${m.corpus.danmaku} 次`
+          }
+          const gloss = m.gloss || '（这条还没考据，只知道是真有人用的梗；别自己编意思，拿不准就别用）'
+          const hits = m.corpus?.hits ? `本地语料 ${m.corpus.hits} 次` : '本地语料没见到'
+          return `· ${m.term}${m.year ? `（${m.year}）` : ''} — ${gloss}`
+            + (m.usage ? `\n  用法：${m.usage}` : '')
+            + `\n  来源：${m.source}；${hits}`
+        }
         return { ok: true, text: `找到 ${list.length} 条：\n` + list.map(one).join('\n') }
       },
     })
