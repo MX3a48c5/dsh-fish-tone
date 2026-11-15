@@ -66,6 +66,27 @@ const INTENSIFIED = /(根本|全都|简直|特别|贼|巨|非常|十分|极其)/
 const NOT_PLAIN = /不(是|但|过|管|仅|同|少|断|久|光|如|乏|及|去|要|好)/
 /// 「不」前面紧跟这些字，说明它是词内成分（分不清 / 说不上 / 差不多），不能往里插
 const VERB_BEFORE = /[分说看听数受弄搞用做想觉拿找算变长来去动忙够值爱恨怕差像要敢能会]$/
+/// 「不」后面紧跟这些字，说明它是动补结构的连接词（打不开 / 开不了工 / 关不上）
+const COMPLEMENT_AFTER = /[了住掉开上下来去出入完到清准透走变成动起见着真够]/
+
+/**
+ * 这个「不」是不是动补结构里的那一个（V 不 C）。
+ *
+ * 动补结构的「不」两头都贴着字，往里插词就把一个词劈成两半：
+ * 「页面打不开」→「页面打明明不开」，「窗口开不了工」→「窗口开明明不了工」。
+ * 判据只看两头：前一个字是汉字、后一个字是补语字或「了」。宁可少插，
+ * 也别写出读不通的句子 —— 插的是语气，不是语法。
+ *
+ * @param {string} body
+ * @param {number} i 「不」在 body 里的位置
+ */
+function buInComplement(body, i) {
+  if (body[i] !== '不') return false
+  const prev = body[i - 1] ?? ''
+  const next = body[i + 1] ?? ''
+  if (!/[\u4e00-\u9fff]/.test(prev)) return false
+  return COMPLEMENT_AFTER.test(next)
+}
 /// 「全」后面这些是名词，不能补「都」
 const QUAN_NOUN = /全(部|国|球|文|班|体|新|程|家|员|局|网|校|年|天|月)/
 /// 全 + 这些动词 → 全都 + 动词
@@ -176,9 +197,9 @@ export function insertMarks(text, opts = {}) {
         if (!INTENSIFIED.test(body)) {
           // 根本不 X ——「像个不识字的人」→「像个根本不识字的人」
           const neg = /不/.exec(body)
-          // A不A（像不像）和词内的「不」（分不清）都不能插
+          // A不A（像不像）和词内的「不」（分不清 / 打不开）都不能插
           const dup = neg && body[neg.index + 1] === body[neg.index - 1]
-          const inWord = neg && (VERB_BEFORE.test(body.slice(0, neg.index)) || body.slice(neg.index + 1, neg.index + 2) === '了')
+          const inWord = neg && (VERB_BEFORE.test(body.slice(0, neg.index)) || buInComplement(body, neg.index))
           if (neg && !dup && !inWord && !NOT_PLAIN.test(body.slice(neg.index, neg.index + 2)) && body.length >= 6) {
             const word = rng() < 0.75 ? '根本' : '压根'
             // 「都/也/还/就」在「不」前面时要插到它前面：「都根本不敢」是病句，「根本都不敢」才对
@@ -226,7 +247,11 @@ export function insertMarks(text, opts = {}) {
           }
           // 明明 + 不 ——「就不对」→「明明就不对」
           const bm = /不/.exec(body)
-          const bmWord = bm && (VERB_BEFORE.test(body.slice(0, bm.index)) || body[bm.index + 1] === body[bm.index - 1])
+          const bmWord = bm && (
+            VERB_BEFORE.test(body.slice(0, bm.index))
+            || buInComplement(body, bm.index)
+            || body[bm.index + 1] === body[bm.index - 1]
+          )
           if (bm && !bmWord && bm.index >= 2 && !NOT_PLAIN.test(body.slice(bm.index, bm.index + 2))) {
             body = body.slice(0, bm.index) + '明明' + body.slice(bm.index)
             hits.push({ ch: '明明', body: body.slice(0, 20) })

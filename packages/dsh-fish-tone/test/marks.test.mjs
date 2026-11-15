@@ -67,3 +67,30 @@ test('markDensity：加强类单独一个数', () => {
   assert.ok(d.intensify > 0)
   assert.ok(d.intensifyLine > 0)
 })
+
+test('insertMarks：动补结构里的「不」不插，词不能被劈开', () => {
+  // 「页面打不开」曾经变成「页面打明明不开」，「开不了工」变成「开明明不了工」
+  const cases = [
+    '页面打不开',
+    '十八点那个窗口开不了工',
+    '灯关不上',
+    '这个功能做不完',
+    '他说话说不清',
+  ]
+  for (const level of ['light', 'normal', 'max']) {
+    for (const seed of [1, 3, 7, 42]) {
+      for (const t of cases) {
+        const r = insertMarks(t, { level, seed })
+        assert.equal(r.text, t, `${level}/${seed}：${r.text}`)
+      }
+    }
+  }
+})
+
+test('insertMarks：不插之后，正常位置照插（别一刀切死）', () => {
+  const a = insertMarks('代码里不能加', { level: 'max', seed: 3 })
+  assert.match(a.text, /(根本|压根)不能加/, a.text)
+
+  const c = insertMarks('塞完读起来像个不识字的人', { level: 'max', seed: 3 })
+  assert.match(c.text, /(根本|压根|简直)/, c.text)
+})
